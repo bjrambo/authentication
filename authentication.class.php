@@ -143,6 +143,11 @@ class authentication extends ModuleObject
 	function recompileCache()
 	{
 	}
+
+	public function makeObject($code = 0, $msg = 'success')
+	{
+		return class_exists('BaseObject') ? new BaseObject($code, $msg) : new Object($code, $msg);
+	}
 }
 /* End of file authentication.class.php */
 /* Location: ./modules/authentication/authentication.class.php */

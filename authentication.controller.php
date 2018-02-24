@@ -30,14 +30,14 @@ class authenticationController extends authentication
 
 		if (preg_match('/[^0-9]/i', $phonenum))
 		{
-			return new Object(-1, "숫자만 입력 가능합니다.");
+			return $this->makeObject(-1, "숫자만 입력 가능합니다.");
 		}
 
 		$country_code = Context::get('country_code');
 
 		if (!$phonenum || !$country_code)
 		{
-			return new Object(-1, '국가 및 휴대폰 번호를 전부 입력해주세요.');
+			return $this->makeObject(-1, '국가 및 휴대폰 번호를 전부 입력해주세요.');
 		}
 		$reqvars = Context::getRequestVars();
 
@@ -63,7 +63,7 @@ class authenticationController extends authentication
 					$member_info = $oMemberModel->getMemberInfoByMemberSrl($v->member_srl);
 					if ($member_info)
 					{
-						return new Object(-1, '가입하신 휴대폰 번호로 중복 가입이 불가능합니다.');
+						return $this->makeObject(-1, '가입하신 휴대폰 번호로 중복 가입이 불가능합니다.');
 					}
 				}
 			}
@@ -112,7 +112,7 @@ class authenticationController extends authentication
 						$member_info = $oMemberModel->getMemberInfoByMemberSrl($v->member_srl);
 						if ($member_info)
 						{
-							return new Object(-1, '가입하신 휴대폰 번호로 중복 가입이 불가능합니다.');
+							return $this->makeObject(-1, '가입하신 휴대폰 번호로 중복 가입이 불가능합니다.');
 						}
 					}
 				}
@@ -141,7 +141,7 @@ class authenticationController extends authentication
 		unset($args);
 		if ($output->data->count > $config->day_try_limit)
 		{
-			return new Object(-1, '잦은 인증번호 요청으로 금지되셨습니다. 1일뒤에 다시 시도해주십시오.');
+			return $this->makeObject(-1, '잦은 인증번호 요청으로 금지되셨습니다. 1일뒤에 다시 시도해주십시오.');
 		}
 
 		// check day try limit
@@ -156,7 +156,7 @@ class authenticationController extends authentication
 		unset($args);
 		if ($output->data->count > 0)
 		{
-			return new Object(-1, $config->authcode_time_limit . '초 동안 다시 받으실 수 없습니다. 전송확인 버튼을 눌러 수신받지 못하는 사유를 확인하세요.');
+			return $this->makeObject(-1, $config->authcode_time_limit . '초 동안 다시 받으실 수 없습니다. 전송확인 버튼을 눌러 수신받지 못하는 사유를 확인하세요.');
 		}
 
 		// save auth info
@@ -198,7 +198,7 @@ class authenticationController extends authentication
 		if ($output->get('error_code'))
 		{
 			$error_message = $oAuthenticationModel->getErrorMessage($output->get('error_code'));
-			return new Object(-1, $error_message);
+			return $this->makeObject(-1, $error_message);
 		}
 		$group_id = $output->get('group_id');
 
@@ -255,7 +255,7 @@ class authenticationController extends authentication
 			{
 				return $trigger_output;
 			}
-			return new Object(-1, '인증코드가 올바르지 않습니다.');
+			return $this->makeObject(-1, '인증코드가 올바르지 않습니다.');
 		}
 	}
 
@@ -331,7 +331,7 @@ class authenticationController extends authentication
 		{
 			$this->startAuthentication($oModule);
 		}
-		return new Object();
+		return $this->makeObject();
 	}
 
 	/*
@@ -350,21 +350,21 @@ class authenticationController extends authentication
 			$logged_info = Context::get('logged_info');
 			if ($logged_info->is_admin == 'Y')
 			{
-				return new Object();
+				return $this->makeObject();
 			}
 		}
 
 		if (!in_array("dispMemberSignUpForm", $action_list))
 		{
-			return new Object();
+			return $this->makeObject();
 		}
 
 		if ($_SESSION['authentication_pass'] != 'Y')
 		{
-			return new Object(-1, "msg_invalid_request");
+			return $this->makeObject(-1, "msg_invalid_request");
 		}
 
-		return new Object();
+		return $this->makeObject();
 	}
 
 	/*
@@ -438,7 +438,7 @@ class authenticationController extends authentication
 	{
 		if (!$in_args->member_srl)
 		{
-			return new Object(-1, 'msg_invalid_request');
+			return $this->makeObject(-1, 'msg_invalid_request');
 		}
 		$args->member_srl = $in_args->member_srl;
 		$output = executeQuery('authentication.deleteAuthenticationMember', $args);
