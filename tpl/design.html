@@ -1,0 +1,63 @@
+<include target="header.html" />
+<load target="../lang" />
+
+<form class="x_form-horizontal" action="./" method="post">
+	<input type="hidden" name="act" value="procAuthenticationAdminDesignConfig" />
+	<input type="hidden" name="module" value="{$module}" />
+	<input type="hidden" name="module_srl" value={$module_srl} />
+
+	<section class="section">
+		<h1>디자인 설정</h1>
+		<div class="x_control-group">
+			<label class="x_control-label" for="layout_srl">레이아웃</label>
+			<div class="x_controls">
+				<select name="layout_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$layout_list => $key,$val" value="{$val->layout_srl}" selected="selected"|cond="$val->layout_srl == $config->layout_srl">{$val->title} ({$val->layout})</option>
+				</select>
+				<a href="#layout_srl_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+            	<p id="layout_srl_help" class="x_help-block" hidden>{$lang->about_layout}</p>
+			</div>
+		</div>		
+		<div class="x_control-group">
+			<label class="x_control-label">스킨</label>
+			<div class="x_controls">
+				<select name="skin">
+					<option loop="$skin_list=>$key,$val" value="{$key}" selected="selected"|cond="$module_info->skin==$key">{$val->title}</option>
+				</select>
+				<a href="#skin_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="skin_help" class="x_help-block" hidden>{$lang->about_skin}</p>
+			</div>
+		</div>		
+		<div class="x_control-group">
+			<label class="x_control-label">모바일 레이아웃</label>
+			<div class="x_controls">
+				<select name="mlayout_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$mlayout_list => $key,$val" value="{$val->layout_srl}" selected="selected"|cond="$val->layout_srl == $config->mlayout_srl">{$val->title} ({$val->layout})</option>
+				</select>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label">모바일 스킨</label>
+			<div class="x_controls">
+				<select name="mskin">
+					<option loop="$mskin_list=>$key,$val" value="{$key}" selected="selected"|cond="$module_info->mskin==$key">{$val->title}</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="x_control-group">
+			<label class="x_control-label">가로길이</label>
+			<div class="x_controls">
+				<input type="text" size="5" name="width" value="{$config->width}" />
+				<a href="#width_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+            	<p id="width_help" class="x_help-block" hidden>가로너비를 설정하실 수 있습니다. 90% 혹은 650px 와 같이 입력해 주세요.</p>
+			</div>
+		</div>
+	</section>
+	<div class="btnArea">
+		<button type="submit" class="x_btn">저장</button>
+	</div>
+</form>
+

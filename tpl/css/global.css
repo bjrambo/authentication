@@ -1,0 +1,8 @@
+.state{padding:3px 5px;margin:6px 0 5px 0; font:11px/18px µ¸¿ò,dotum; letter-spacing:-1px; color:#616161;border:1px solid #D7D7D7; background:#F3F3F3; list-style:none; }
+.state li{padding:2px 0; font:11px/13px µ¸¿ò,dotum; }
+.state li.time_now{color:#5DAE0A; padding:5px 0 3px 0; text-align:center;}
+.state li.time_now span{padding:0 3px 0 0;font-weight:bold;color:#999; font:bold 11px/13px µ¸¿ò,dotum;}
+.state input {margin:0; padding:2px 3px 0; _padding:3px 3px 0; font:11px/13px µ¸¿ò,dotum; color:#7f7f7f; border:1px solid #d3d3d3; vertical-align:middle;width:37px}
+.state input.phone_num{width:90px; margin-left:3px}
+.state select{width:148px;margin:0; font:11px/13px µ¸¿ò,dotum; color:#7f7f7f; border:1px solid #d3d3d3; vertical-align:middle;}
+.state select.state_sel{width:105px;_width:104px;}

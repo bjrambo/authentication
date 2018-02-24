@@ -1,0 +1,19 @@
+<query id="getAuthenticationMemberListByClue" action="select">
+	<tables>
+		<table name="authentication_member" alias="authmem" />
+		<table name="member" alias="mem" />
+	</tables>
+	<columns>
+		<column name="mem.*" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="authmem.clue" var="clue" notnull="notnull" />
+		<condition operation="equal" column="mem.member_srl" default="authmem.member_srl" pipe="and" />
+	</conditions>
+	<navigation>
+		<index var="sort_index" default="authmem.regdate" order="asc" />
+		<list_count var="list_count" default="20" />
+		<page_count var="page_count" default="10" />
+		<page var="page" default="1" />
+	</navigation>
+</query>

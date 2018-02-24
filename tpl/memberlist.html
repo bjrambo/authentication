@@ -1,0 +1,71 @@
+<include target="header.html" />
+<!--%import("css/config.css")-->
+
+<a cond="0" href="{getUrl('act','procAuthenticationAdminMigrateFromMXE')}">Migrate from MXE</a>
+
+<form aciton="./" class="x_form-horizontal" method="get">
+		<input type="hidden" name="module" value="{$module}" />
+		<input type="hidden" name="act" value="{$act}" />
+		<input type="hidden" name="search_key" value="Y" />
+	<section class="section">
+		<div class="x_control-group">
+			<label class="x_control-label">인증회원조회</label>
+				<div class="x_contorls">	
+					<select name="search_key">
+						<option value="">선택</option>
+						<option value="phone_number" selected="selected"|cond="$search_key=='phone_number'">폰번호</option>
+						<option value="user_id" selected="selected"|cond="$search_key=='user_id'">아이디</option>
+						<option value="nick_name" selected="selected"|cond="$search_key=='nick_name'">닉네임</option>
+					</select>
+				<input type="text" name="search_value" value="{$search_value}" />
+				<button class="x_btn" type="submit" >조회</button>
+				</div>
+		</div>	
+	</section>
+	<section class="section">	
+		<caption style="text-align:right; margin-bottom:10px;">Total {number_format($total_count)}, Page {number_format($page)}/{number_format($total_page)}</caption>	
+			<table class="x_table">
+				<thead>
+					<tr>
+						<th scope="col">No.</th>
+						<th scope="col">아이디</th>
+						<th scope="col">닉네임</th>
+						<th scope="col">국가</th>
+						<th scope="col">휴대폰번호.</th>
+						<th scope="col">인증번호.</th>
+						<th scope="col">날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr loop="$list => $no,$val">
+						<td>{$no}</td>
+						<td>{$val->user_id}</td>
+						<td>{$val->nick_name}</td>
+						<td>{$val->country}</td>
+						<td>{$val->clue}</td>
+						<td>{$val->authcode}</td>
+						<td>{zdate($val->regdate)}</td>	
+					</tr>
+				</tbody>
+			</table>
+	</section>
+</form>
+
+<include target="_page_navigation.html" />
+
+<!-- 페이지 네비게이션 -->
+<div cond="0" class="x_clearfix">
+    <a href="{getUrl('page','','module_srl','')}" class="prevEnd">{$lang->first_page}</a> 
+    <!--@while($page_no = $page_navigation->getNextPage())-->
+        <!--@if($page == $page_no)-->
+            <strong>{$page_no}</strong> 
+        <!--@else-->
+            <a href="{getUrl('page',$page_no,'module_srl','')}">{$page_no}</a> 
+        <!--@end-->
+    <!--@end-->
+    <a href="{getUrl('page',$page_navigation->last_page,'module_srl','')}" class="nextEnd">{$lang->last_page}</a>
+</div>
+
+<div class="btnArea">
+	<a href="{getUrl('act','dispAuthenticationAdminXLSDownload')}" class="x_btn">XLS 다운로드</a>
+</div>

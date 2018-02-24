@@ -1,0 +1,9 @@
+<table name="authentication">
+	<column name="authentication_srl" type="number" size="11" index="idx_authentication_srl" notnull="notnull" />
+	<column name="clue" type="varchar" size="120" notnull="notnull" index="idx_clue" />
+	<column name="authcode" type="varchar" size="80" notnull="notnull" />
+	<column name="passed" type="char" size="1" default="N" />
+	<column name="country_code" type="varchar" size="11" />
+	<column name="ipaddress" type="varchar" size="30" />
+	<column name="regdate" type="date" notnull="notnull" index="idx_regdate" />
+</table>

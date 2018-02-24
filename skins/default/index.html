@@ -1,0 +1,97 @@
+<load target="../../tpl/skin.js/script.js" />
+<load target="css/style.css" />
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+<div id="phone" style="width:{$config->width}"|cond="$config->width">
+	<div id="header">
+		<h2 class="au_h1"><div class="au_title">휴대폰번호 인증</div></h2>
+	</div><!-- #header// -->
+	<form method="post" action="./" >
+		<input type="hidden" name="act" value="procAuthenticationVerifyAuthCode" />
+		<input type="hidden" id="authentication_srl" name="authentication_srl" value={$authentication_srl} />
+		<input type="hidden" name="module" value="authentication" />
+		<input type="hidden" id="group_id" value="" />
+		<input type="hidden" name="accept_agreement" value="Y" id="no_agreement" cond="!$config->agreement" />
+
+		<div class="agreement" cond="$config->agreement">
+			<div class="text">
+				{$config->agreement}
+			</div>
+			<div class="confirm">
+				<label for="accept_agree">
+					<input type="checkbox" name="accept_agreement" value="Y" id="accept_agree" />
+					{$lang->about_accept_agreement}
+				</label>
+			</div>
+		</div>
+
+		<div class="au_container">
+			<dl class="container_dl">
+				<dt class="orangeTop">국가선택</dt>
+				<dd class="orangeTop">
+					<select name="country_code" id="country_code" class="size04">
+						<option value=''>선택</option>
+						{@asort($lang->country_codes)}
+						<option loop="$lang->country_codes=>$key,$val" value="{$key}" selected="selected"|cond="$config->country_code == $key">{$val}</option>
+					</select>
+				</dd>
+			</dl>
+			<dl class="container_dl">
+				<dt>휴대폰번호</dt>
+				<dd>	
+					<input class="input01 size04" type="text" name="phonenum[]" id="phonenum_1" size="5" value="ex)01000000000" style="color:gray;" onfocus="if (this.value=='ex)01000000000') this.value=''; this.style.color='black';" maxlength="15" title="- 없이 전화번호를 입력하세요" />
+					<a href="#" onclick="getAuthCode('{$target_action}'); return false;" id="get_authcode" class="btn_wrap au_blue"><span>인증번호 받기</span></a>
+					<a cond="0" href="#" onclick="getAuthCode(); return false;" id="authcode_resend"></a>
+				</dd>
+			</dl>
+			<dl class="container_dl">
+				<dt class="orangeBottom">인증번호</dt>
+				<dd class="orangeBottom">
+					<input class="input01 size03" type="text" id="authcode" name="authcode" maxlength="{$config->digit_number}" />
+					<a href="#" onclick="verifyAuthCode(); return false" class="btn_wrap au_gray submit">확인</a>
+				</dd>
+			</dl>
+		</div>
+	</form>
+	
+	<div id="au_content">
+		<span>인증번호가 오지 않는다면? <a href="#" onclick="updateStatus(); return false" class="au_green green_btn">전송확인</a></span>
+		<div id="footer">
+			<div id="notice" class="con_box"></div>
+			<div class="au_section">
+				<div>
+					<p class="center">이동 통신사별 스팸 확인법</p>
+					<ul class="spam_wrap">
+						<li>
+							<p class="spam_title">SKT</p><a href="http://www.tworld.co.kr" target="_blank">http://www.tworld.co.kr</a><br />상품->부가서비스->통화->스팸필터링
+							<br />tstore : <a href="http://m.tstore.co.kr/mobilepoc/apps/appsDetail.omp?prodId=0000029241&strPrePageNm=0c05003H&strDisplayOrder=1&strPid=0000029241&strBannerId=&strSearchword=%EC%8A%A4%ED%8C%B8%EC%B0%A8%EB%8B%A8&dateKey=MW140526141328208730#" target="_black">t스팸필터링</a> 
+							<br />appstore : <a href="https://itunes.apple.com/kr/app/tseupaempilteoling/id447324256?mt=8" target="_black">t스팸필터링</a>앱에서 확인
+						</li>
+						<li>
+							<p class="spam_title">KT</p><a href="http://www.olleh.com" target="_blank">http://www.olleh.com</a><br />폰서비스->문자/통화/주소록->스팸차단 서비스
+							<br />googleplay : <a href="https://play.google.com/store/apps/details?id=com.olleh.spam" target="_black">올레스팸차단</a> 
+							<br />appstore : <a href="https://itunes.apple.com/kr/app/olleseupaemchadan/id397692999?mt=8" target="_black">올레스팸차단</a>앱에서 확인
+						</li>
+						<li>
+							<p class="spam_title">LG</p><a href="http://www.uplus.co.kr" target="_blank">http://www.uplus.co.kr</a><br />개인->모바일->부가서비스->통화보호->스팸차단 
+							<br />googleplay : <a href="https://play.google.com/store/apps/details?id=com.lguplus.blocksmishing" target="_black">U+스팸차단</a>앱에서 확인
+						</li>
+					</ul>
+			</div>
+		</div><!-- .au_section// -->	
+		</div><!-- #footer// -->
+		<div class="delay_status" id="au_delay_status">
+			<p><strong>통신사별 문자발송상태</strong></p>
+			<span class="text_group"><span class="text_green text_bold">SKT</span><span class="text_bold text_black">{$status->sms_sk}</span></span>
+			<span class="text_group"><span class="text_green text_bold">KT</span><span class="text_bold text_black">{$status->sms_kt}</span></span>
+			<span class="text_group"><span class="text_green text_bold">LG</span><span class="text_bold text_black">{$status->sms_lg}</span></span>
+		</div>
+
+	
+	</div>
+
+	
+</div>

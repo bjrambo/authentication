@@ -1,0 +1,11 @@
+<query id="getAuthenticationMember" action="select">
+	<tables>
+		<table name="authentication_member" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="member_srl" var="member_srl" notnull="notnull" pipe="and" />
+	</conditions>
+</query>

@@ -1,0 +1,63 @@
+<load target="../../tpl/skin.js/script.js" />
+<load target="css/style.css" />
+
+<div id="container">
+
+	<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+
+	<span id = "authcode_title">◈ 휴대폰번호 인증</span>
+
+	<input type="hidden" name="authcode_mid" id="authcode_mid" value="{$authcode_mid}" />
+	<br/>
+	<div class="country">
+		<span>국가<span>
+		<select name="country" id="country">
+			<option>선택</option>
+			<option value="82" selected="selected"|cond="$country == '82'">한국</option>
+			<option value="1" selected="selected"|cond="$country == '1'">미국</option>
+			<option value="86" selected="selected"|cond="$country == '86'">중국</option>
+			<option value="81" selected="selected"|cond="$country == '81'">일본</option>
+		</select>
+	</div>
+
+	<br/>
+	<div class="phone">
+		<span>휴대폰번호</span> 
+		<select name="phone_1" id="phone_1">
+			<option>선택</option>
+			<option value="010" selected="selected"|cond="$phone_1 == '010'" >010</option>
+			<option value="011" selected="selected"|cond="$phone_1 == '011'" >011</option>
+			<option value="016" selected="selected"|cond="$phone_1 == '016'" >016</option>
+			<option value="017" selected="selected"|cond="$phone_1 == '017'" >017</option>
+			<option value="018" selected="selected"|cond="$phone_1 == '018'" >018</option>
+			<option value="019" selected="selected"|cond="$phone_1 == '019'" >019</option>
+		</select>
+		-
+		<input type="text" name="phone_2" id="phone_2" size="5" maxlength="4" value="{$phone_2}" ></input>
+		-
+		<input type="text" name="phone_3" id="phone_3" size="5" maxlength="4" value="{$phone_3}" ></input>
+		<div id="authcodesend">
+			<button onclick="authcodeSend(); return false;" id="submit_authcode" >인증번호 보내기</button>
+		</div>
+	</div>
+
+	<br />
+
+	<div id="authcode_box">
+		<div id="authcode_box_2" cond="$phone_1">
+			<form method="post" action="./"><input type="hidden" name="act" value="procAuthenticationCompare" />
+				<input type="hidden" name="authentication_srl" value={$authentication_srl} />
+				<input type="hidden" name="authcode_mid" value={$authcode_mid} />인증번호를 입력하세요. 
+				<input type="text" id="authcode" name="authcode" />
+				<input type="submit" value="확인" />
+			</form>
+		</div>
+	</div>
+	<div class="authcode_update">
+		<span>인증번호가오지 않는다면?<button onclick="updateStatus(); return false">오류 확인</button></span>
+	</div>
+	<div id="authcode_box_3">
+	</div>
+</div>

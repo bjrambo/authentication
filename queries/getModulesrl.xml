@@ -1,0 +1,11 @@
+<query id="getModulesrl" action="select">
+	<tables>
+		<table name="modules" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="module" var="module" notnull="notnull" />
+	</conditions>
+</query>

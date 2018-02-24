@@ -1,0 +1,27 @@
+<query id="getAuthenticationMemberList" action="select">
+	<tables>
+		<table name="authentication_member" alias="authmem" />
+		<table name="member" alias="mem" />
+	</tables>
+	<columns>
+		<column name="authmem.member_srl" alias="member_srl" />
+		<column name="authmem.clue" alias="clue" />
+		<column name="authmem.country_code" alias="country_code" />
+		<column name="authmem.authcode" alias="authcode" />
+		<column name="mem.user_id" alias="user_id" />
+		<column name="mem.nick_name" alias="nick_name" />
+		<column name="authmem.regdate" alias="regdate" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="authmem.member_srl" default="mem.member_srl" />
+		<condition operation="equal" column="authmem.clue" var="clue" pipe="and" />
+		<condition operation="equal" column="mem.user_id" var="user_id" pipe="and" />
+		<condition operation="equal" column="mem.nick_name" var="nick_name" pipe="and" />
+	</conditions>
+	<navigation>
+		<index var="sort_index" default="authmem.regdate" order="desc" />
+		<list_count var="list_count" default="20" />
+		<page_count var="page_count" default="10" />
+		<page var="page" default="1" />
+	</navigation>
+</query>

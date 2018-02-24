@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+    <grants />
+    <permissions />
+	<menus>
+	</menus>
+    <actions>
+		<action name="dispAuthenticationAdminConfig" type="view" admin_index="true" />
+		<action name="dispAuthenticationAdminAuthcodeList" type="view"/>
+		<action name="dispAuthenticationAdminMemberList" type="view"/>
+		<action name="dispAuthenticationAdminXLSDownload" type="view"/>
+		<action name="dispAuthenticationAdminSkinInfo" type="view"/>
+		<action name="dispAuthenticationAdminDesign" type="view"/>
+
+		<action name="procAuthenticationAdminConfig" type="controller" />
+		<action name="procAuthenticationAdminMigrateFromMXE" type="controller" />
+		<action name="procAuthenticationAdminDesignConfig" type="controller" />
+
+		<action name="getAuthenticationAdminNumber" type="model" />
+
+		<action name="procAuthenticationSendAuthCode" type="controller" ruleset="send_authcode" />
+		<action name="procAuthenticationVerifyAuthCode" type="controller" ruleset="verify_authcode" />
+		<action name="procAuthenticationUpdateStatus" type="controller" />
+    </actions>
+</module>

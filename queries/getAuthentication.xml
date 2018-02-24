@@ -1,0 +1,12 @@
+<query id="getAuthentication" action="select">
+	<tables>
+		<table name="authentication" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="authentication_srl" var="authentication_srl" notnull="notnull" pipe="and" />
+		<condition operation="equal" column="regdate" var="regdate" pipe="and" />
+	</conditions>
+</query>

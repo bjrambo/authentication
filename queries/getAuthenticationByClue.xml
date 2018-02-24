@@ -1,0 +1,12 @@
+<query id="getAuthenticationByClue" action="select">
+	<tables>
+		<table name="authentication" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="clue" var="clue" notnull="notnull" pipe="and" />
+		<condition operation="like" column="regdate" var="regdate" pipe="and" />
+	</conditions>
+</query>

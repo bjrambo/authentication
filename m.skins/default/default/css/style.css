@@ -1,0 +1,25 @@
+#container { margin : auto; width:400px; background-color:#0099CC; border: 1px solid black; }
+#authcode_title { font-size : 15pt; color : #FF6600; }
+#authcodesend { display : inline; }
+
+/* 국가
+ */
+
+.country {  }
+
+/* 휴대폰번호
+ */
+
+.phone {  }
+
+/* 인증번호
+ */
+
+#authcode_box {  }
+
+/* 오류확인 창
+ */
+
+.authcode_update { background-color : #66CCCC; border:1px solid black; margin-top : 20px; }
+
+

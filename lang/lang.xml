@@ -1,0 +1,662 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="digit_number">
+		<value xml:lang="ko"><![CDATA[인증번호 자릿수]]></value>
+	</item>
+	<item name="authcode">
+		<value xml:lang="ko"><![CDATA[인증번호]]></value>
+	</item>
+	<item name="about_accept_agreement">
+		<value xml:lang="ko"><![CDATA[위 사항을 모두 읽었으며 동의합니다.]]></value>
+		<value xml:lang="en"><![CDATA[accept_agreement]]></value>
+	</item>
+
+	<item name="validationcode_act">
+		<value xml:lang="ko"><![CDATA[액션선택]]></value>
+		<value xml:lang="en"><![CDATA[Select Action]]></value>
+	</item>
+	<item name="validationcode_send_limit">
+		<value xml:lang="ko"><![CDATA[인증번호 재전송 시간]]></value>
+		<value xml:lang="en"><![CDATA[Send Authcode Limit]]></value>
+	</item>
+
+	<item name="validationcode_limit">
+		<value xml:lang="ko"><![CDATA[인증번호 자릿수 제한]]></value>
+		<value xml:lang="en"><![CDATA[Authentication a cipherl imit]]></value>
+	</item>
+	<item name="validationcode_message_limit">
+		<value xml:lang="ko"><![CDATA[인증번호 전송횟수 제한]]></value>
+		<value xml:lang="en"><![CDATA[Authentication transmit number limit]]></value>
+	</item>
+
+	<item name="validationcode_content">
+		<value xml:lang="ko"><![CDATA[메시지 내용.]]></value>
+		<value xml:lang="en"><![CDATA[Message content.]]></value>
+	</item>
+	<item name="dispMemberSignUpForm">
+		<value xml:lang="ko"><![CDATA[회원가입]]></value>
+		<value xml:lang="en"><![CDATA[Sign Up]]></value>
+	</item>
+	<item name="dispMemberModifyInfo">
+		<value xml:lang="ko"><![CDATA[회원정보 수정]]></value>
+		<value xml:lang="en"><![CDATA[Modifying Member Info.]]></value>
+	</item>
+	<item name="dispMemberModifyPassword">
+		<value xml:lang="ko"><![CDATA[비밀번호 변경]]></value>
+		<value xml:lang="en"><![CDATA[Modifying password]]></value>
+	</item>
+	<item name="dispMemberLeave">
+		<value xml:lang="ko"><![CDATA[회원탈퇴]]></value>
+		<value xml:lang="en"><![CDATA[Leave membership]]></value>
+	</item>
+	<item name="about_number_limit">
+		<value xml:lang="ko"><![CDATA[빈칸으로 두시면 기본 다섯자로 인증번호가 전송됩니다. 최대 여덞자 까지 가능합니다.]]></value>
+	</item>
+	<item name="about_validationcode_fieldname">
+		<value xml:lang="ko"><![CDATA[핸드폰인증 애드온 사용시 반드시 설정해야할 항목입니다. 매뉴얼을 참고하세요.<br />핸드폰인증 애드온을 사용하지 않으신다면 비워두세요.]]></value>
+		<value xml:lang="en"><![CDATA[Authentication Field]]></value>
+	</item>
+	<item name="about_sender_no">
+		<value xml:lang="ko"><![CDATA[설정된 발신번호로 인증문자를 발송합니다.]]></value>
+	</item>
+
+	<item name="country_codes" type="array">
+		<item name="233">
+			<value xml:lang="ko"><![CDATA[가나]]></value>
+		</item>
+		<item name="241">
+			<value xml:lang="ko"><![CDATA[가봉]]></value>
+		</item>
+		<item name="241">
+			<value xml:lang="ko"><![CDATA[가봉]]></value>
+		</item>
+		<item name="220">
+			<value xml:lang="ko"><![CDATA[감비아]]></value>
+		</item>
+
+		<item name="264">
+			<value xml:lang="ko"><![CDATA[나미비아]]></value>
+		</item>
+		<item name="234">
+			<value xml:lang="ko"><![CDATA[나이지리아]]></value>
+		</item>
+		<item name="27">
+			<value xml:lang="ko"><![CDATA[남아공화국]]></value>
+		</item>
+		<item name="227">
+			<value xml:lang="ko"><![CDATA[니제르]]></value>
+		</item>
+		<item name="977">
+			<value xml:lang="ko"><![CDATA[네팔]]></value>
+		</item>
+		<item name="64">
+			<value xml:lang="ko"><![CDATA[뉴질랜드]]></value>
+		</item>
+
+		<item name="231">
+			<value xml:lang="ko"><![CDATA[라이베리아]]></value>
+		</item>
+		<item name="266">
+			<value xml:lang="ko"><![CDATA[레소토]]></value>
+		</item>
+		<item name="250">
+			<value xml:lang="ko"><![CDATA[르완다]]></value>
+		</item>
+		<item name="261">
+			<value xml:lang="ko"><![CDATA[마다가스카르]]></value>
+		</item>
+		<item name="265">
+			<value xml:lang="ko"><![CDATA[말라위]]></value>
+		</item>
+		<item name="223">
+			<value xml:lang="ko"><![CDATA[말리]]></value>
+		</item>
+		<item name="212">
+			<value xml:lang="ko"><![CDATA[모로코]]></value>
+		</item>
+		<item name="230">
+			<value xml:lang="ko"><![CDATA[모리셔스]]></value>
+		</item>
+		<item name="222">
+			<value xml:lang="ko"><![CDATA[모리타니]]></value>
+		</item>
+		<item name="258">
+			<value xml:lang="ko"><![CDATA[모잠비크]]></value>
+		</item>
+		<item name="267">
+			<value xml:lang="ko"><![CDATA[보츠와나]]></value>
+		</item>
+		<item name="221">
+			<value xml:lang="ko"><![CDATA[세네갈]]></value>
+		</item>
+		<item name="248">
+			<value xml:lang="ko"><![CDATA[세이셸]]></value>
+		</item>
+		<item name="249">
+			<value xml:lang="ko"><![CDATA[수단]]></value>
+		</item>
+		<item name="268">
+			<value xml:lang="ko"><![CDATA[스와질란드]]></value>
+		</item>
+		<item name="232">
+			<value xml:lang="ko"><![CDATA[시에라리온]]></value>
+		</item>
+		<item name="244">
+			<value xml:lang="ko"><![CDATA[앙골라]]></value>
+		</item>
+		<item name="251">
+			<value xml:lang="ko"><![CDATA[에티오피아]]></value>
+		</item>
+		<item name="256">
+			<value xml:lang="ko"><![CDATA[우간다]]></value>
+		</item>
+		<item name="20">
+			<value xml:lang="ko"><![CDATA[이집트]]></value>
+		</item>
+		<item name="260">
+			<value xml:lang="ko"><![CDATA[잠비아]]></value>
+		</item>
+		<item name="263">
+			<value xml:lang="ko"><![CDATA[짐바브웨]]></value>
+		</item>
+		<item name="237">
+			<value xml:lang="ko"><![CDATA[카메룬]]></value>
+		</item>
+		<item name="254">
+			<value xml:lang="ko"><![CDATA[케냐]]></value>
+		</item>
+		<item name="242">
+			<value xml:lang="ko"><![CDATA[콩고]]></value>
+		</item>
+		<item name="255">
+			<value xml:lang="ko"><![CDATA[탄자니아]]></value>
+		</item>
+		<item name="228">
+			<value xml:lang="ko"><![CDATA[토고]]></value>
+		</item>
+		<item name="216">
+			<value xml:lang="ko"><![CDATA[튀니지]]></value>
+		</item>
+
+		<item name="886">
+			<value xml:lang="ko"><![CDATA[대만]]></value>
+		</item>
+		<item name="82">
+			<value xml:lang="ko"><![CDATA[대한민국]]></value>
+		</item>
+		<item name="1809">
+			<value xml:lang="ko"><![CDATA[도미니카 공화국]]></value>
+		</item>
+		<item name="856">
+			<value xml:lang="ko"><![CDATA[라오스]]></value>
+		</item>
+		<item name="596">
+			<value xml:lang="ko"><![CDATA[마르티니크]]></value>
+		</item>
+		<item name="853">
+			<value xml:lang="ko"><![CDATA[마카오]]></value>
+		</item>
+		<item name="60">
+			<value xml:lang="ko"><![CDATA[말레이시아]]></value>
+		</item>
+		<item name="960">
+			<value xml:lang="ko"><![CDATA[몰디브]]></value>
+		</item>
+		<item name="976">
+			<value xml:lang="ko"><![CDATA[몽고]]></value>
+		</item>
+		<item name="95">
+			<value xml:lang="ko"><![CDATA[미얀마]]></value>
+		</item>
+		<item name="678">
+			<value xml:lang="ko"><![CDATA[바누아투]]></value>
+		</item>
+		<item name="880">
+			<value xml:lang="ko"><![CDATA[방글라데시]]></value>
+		</item>
+		<item name="84">
+			<value xml:lang="ko"><![CDATA[베트남]]></value>
+		</item>
+		<item name="975">
+			<value xml:lang="ko"><![CDATA[부탄]]></value>
+		</item>
+		<item name="673">
+			<value xml:lang="ko"><![CDATA[브루나이]]></value>
+		</item>
+		<item name="1670">
+			<value xml:lang="ko"><![CDATA[사이판]]></value>
+		</item>
+		<item name="94">
+			<value xml:lang="ko"><![CDATA[스리랑카]]></value>
+		</item>
+		<item name="65">
+			<value xml:lang="ko"><![CDATA[싱가포르]]></value>
+		</item>
+		<item name="93">
+			<value xml:lang="ko"><![CDATA[아프가니스탄]]></value>
+		</item>
+		<item name="91">
+			<value xml:lang="ko"><![CDATA[인도]]></value>
+		</item>
+		<item name="62">
+			<value xml:lang="ko"><![CDATA[인도네시아]]></value>
+		</item>
+		<item name="81">
+			<value xml:lang="ko"><![CDATA[일본]]></value>
+		</item>
+		<item name="86">
+			<value xml:lang="ko"><![CDATA[중국]]></value>
+		</item>
+		<item name="855">
+			<value xml:lang="ko"><![CDATA[캄보디아]]></value>
+		</item>
+		<item name="269">
+			<value xml:lang="ko"><![CDATA[코모로]]></value>
+		</item>
+		<item name="66">
+			<value xml:lang="ko"><![CDATA[태국]]></value>
+		</item>
+		<item name="993">
+			<value xml:lang="ko"><![CDATA[투르크메니스탄]]></value>
+		</item>
+		<item name="92">
+			<value xml:lang="ko"><![CDATA[파키스탄]]></value>
+		</item>
+		<item name="679">
+			<value xml:lang="ko"><![CDATA[피지]]></value>
+		</item>
+		<item name="63">
+			<value xml:lang="ko"><![CDATA[필리핀]]></value>
+		</item>
+		<item name="852">
+			<value xml:lang="ko"><![CDATA[홍콩]]></value>
+		</item>
+		<item name="1473">
+			<value xml:lang="ko"><![CDATA[그레나다]]></value>
+		</item>
+		<item name="52">
+			<value xml:lang="ko"><![CDATA[멕시코]]></value>
+		</item>
+		<item name="1246">
+			<value xml:lang="ko"><![CDATA[바베이도스]]></value>
+		</item>
+		<item name="1441">
+			<value xml:lang="ko"><![CDATA[버뮤다]]></value>
+		</item>
+		<item name="58">
+			<value xml:lang="ko"><![CDATA[베네수엘라]]></value>
+		</item>
+		<item name="501">
+			<value xml:lang="ko"><![CDATA[벨리즈]]></value>
+		</item>
+		<item name="591">
+			<value xml:lang="ko"><![CDATA[볼리비아]]></value>
+		</item>
+		<item name="55">
+			<value xml:lang="ko"><![CDATA[브라질]]></value>
+		</item>
+		<item name="1758">
+			<value xml:lang="ko"><![CDATA[세인트루시아]]></value>
+		</item>
+		<item name="1784">
+			<value xml:lang="ko"><![CDATA[세인트빈센트 그레나딘]]></value>
+		</item>
+		<item name="297">
+			<value xml:lang="ko"><![CDATA[아루바]]></value>
+		</item>
+		<item name="54">
+			<value xml:lang="ko"><![CDATA[아르헨티나]]></value>
+		</item>
+		<item name="1268">
+			<value xml:lang="ko"><![CDATA[앤티가 바부다]]></value>
+		</item>
+		<item name="503">
+			<value xml:lang="ko"><![CDATA[엘살바도르]]></value>
+		</item>
+		<item name="1876">
+			<value xml:lang="ko"><![CDATA[자메이카]]></value>
+		</item>
+		<item name="56">
+			<value xml:lang="ko"><![CDATA[칠레]]></value>
+		</item>
+		<item name="1345">
+			<value xml:lang="ko"><![CDATA[케이맨 제도 ]]></value>
+		</item>
+		<item name="57">
+			<value xml:lang="ko"><![CDATA[콜롬비아]]></value>
+		</item>
+		<item name="53">
+			<value xml:lang="ko"><![CDATA[쿠바]]></value>
+		</item>
+		<item name="1868">
+			<value xml:lang="ko"><![CDATA[트리니다드토바고]]></value>
+		</item>
+		<item name="507">
+			<value xml:lang="ko"><![CDATA[파나마]]></value>
+		</item>
+		<item name="595">
+			<value xml:lang="ko"><![CDATA[파라과이]]></value>
+		</item>
+		<item name="51">
+			<value xml:lang="ko"><![CDATA[페루]]></value>
+		</item>
+		<item name="995">
+			<value xml:lang="ko"><![CDATA[그루지아]]></value>
+		</item>
+		<item name="30">
+			<value xml:lang="ko"><![CDATA[그리스]]></value>
+		</item>
+		<item name="299">
+			<value xml:lang="ko"><![CDATA[그린랜드]]></value>
+		</item>
+		<item name="31">
+			<value xml:lang="ko"><![CDATA[네덜란드]]></value>
+		</item>
+		<item name="599">
+			<value xml:lang="ko"><![CDATA[네덜란드령 안틸레스]]></value>
+		</item>
+		<item name="47">
+			<value xml:lang="ko"><![CDATA[노르웨이]]></value>
+		</item>
+		<item name="45">
+			<value xml:lang="ko"><![CDATA[덴마크]]></value>
+		</item>
+		<item name="49">
+			<value xml:lang="ko"><![CDATA[독일]]></value>
+		</item>
+		<item name="371">
+			<value xml:lang="ko"><![CDATA[라트비아]]></value>
+		</item>
+		<item name="7">
+			<value xml:lang="ko"><![CDATA[러시아]]></value>
+		</item>
+		<item name="262">
+			<value xml:lang="ko"><![CDATA[레위니옹]]></value>
+		</item>
+		<item name="40">
+			<value xml:lang="ko"><![CDATA[루마니아]]></value>
+		</item>
+		<item name="352">
+			<value xml:lang="ko"><![CDATA[룩셈부르크]]></value>
+		</item>
+		<item name="218">
+			<value xml:lang="ko"><![CDATA[리비아]]></value>
+		</item>
+		<item name="370">
+			<value xml:lang="ko"><![CDATA[리투아니아]]></value>
+		</item>
+		<item name="423">
+			<value xml:lang="ko"><![CDATA[리히텐슈타인]]></value>
+		</item>
+		<item name="389">
+			<value xml:lang="ko"><![CDATA[마케도니아 공화국]]></value>
+		</item>
+		<item name="377">
+			<value xml:lang="ko"><![CDATA[모나코2]]></value>
+		</item>
+		<item name="373">
+			<value xml:lang="ko"><![CDATA[몰도바]]></value>
+		</item>
+		<item name="32">
+			<value xml:lang="ko"><![CDATA[벨기에]]></value>
+		</item>
+		<item name="375">
+			<value xml:lang="ko"><![CDATA[벨라루스]]></value>
+		</item>
+		<item name="387">
+			<value xml:lang="ko"><![CDATA[보스니아 헤르체고비나]]></value>
+		</item>
+		<item name="257">
+			<value xml:lang="ko"><![CDATA[부룬디]]></value>
+		</item>
+		<item name="226">
+			<value xml:lang="ko"><![CDATA[부르키나파소]]></value>
+		</item>
+		<item name="359">
+			<value xml:lang="ko"><![CDATA[불가리아]]></value>
+		</item>
+		<item name="39">
+			<value xml:lang="ko"><![CDATA[산마리노]]></value>
+		</item>
+		<item name="381">
+			<value xml:lang="ko"><![CDATA[세르비아 몬테그로]]></value>
+		</item>
+		<item name="46">
+			<value xml:lang="ko"><![CDATA[스웨덴]]></value>
+		</item>
+		<item name="41">
+			<value xml:lang="ko"><![CDATA[스위스]]></value>
+		</item>
+		<item name="34">
+			<value xml:lang="ko"><![CDATA[스페인]]></value>
+		</item>
+		<item name="421">
+			<value xml:lang="ko"><![CDATA[슬로바키아]]></value>
+		</item>
+		<item name="386">
+			<value xml:lang="ko"><![CDATA[슬로베니아]]></value>
+		</item>
+		<item name="374">
+			<value xml:lang="ko"><![CDATA[아르메니아]]></value>
+		</item>
+		<item name="354">
+			<value xml:lang="ko"><![CDATA[아이슬란드]]></value>
+		</item>
+		<item name="353">
+			<value xml:lang="ko"><![CDATA[아일랜드]]></value>
+		</item>
+		<item name="376">
+			<value xml:lang="ko"><![CDATA[안도라]]></value>
+		</item>
+		<item name="355">
+			<value xml:lang="ko"><![CDATA[알바니아]]></value>
+		</item>
+		<item name="213">
+			<value xml:lang="ko"><![CDATA[알제리]]></value>
+		</item>
+		<item name="372">
+			<value xml:lang="ko"><![CDATA[에스토니아]]></value>
+		</item>
+		<item name="44">
+			<value xml:lang="ko"><![CDATA[영국]]></value>
+		</item>
+		<item name="43">
+			<value xml:lang="ko"><![CDATA[오스트리아]]></value>
+		</item>
+		<item name="380">
+			<value xml:lang="ko"><![CDATA[우크라이나]]></value>
+		</item>
+		<item name="39">
+			<value xml:lang="ko"><![CDATA[이탈리아]]></value>
+		</item>
+		<item name="350">
+			<value xml:lang="ko"><![CDATA[지브롤터]]></value>
+		</item>
+		<item name="420">
+			<value xml:lang="ko"><![CDATA[체코]]></value>
+		</item>
+		<item name="385">
+			<value xml:lang="ko"><![CDATA[크로아티아]]></value>
+		</item>
+		<item name="90">
+			<value xml:lang="ko"><![CDATA[터키]]></value>
+		</item>
+		<item name="298">
+			<value xml:lang="ko"><![CDATA[페로 제도]]></value>
+		</item>
+		<item name="351">
+			<value xml:lang="ko"><![CDATA[포르투갈]]></value>
+		</item>
+		<item name="48">
+			<value xml:lang="ko"><![CDATA[폴란드]]></value>
+		</item>
+		<item name="33">
+			<value xml:lang="ko"><![CDATA[프랑스]]></value>
+		</item>
+		<item name="594">
+			<value xml:lang="ko"><![CDATA[프랑스령기아나 ]]></value>
+		</item>
+		<item name="689">
+			<value xml:lang="ko"><![CDATA[프랑스령폴리네시아]]></value>
+		</item>
+		<item name="358">
+			<value xml:lang="ko"><![CDATA[핀란드]]></value>
+		</item>
+		<item name="36">
+			<value xml:lang="ko"><![CDATA[헝가리]]></value>
+		</item>
+		<item name="961">
+			<value xml:lang="ko"><![CDATA[레바논]]></value>
+		</item>
+		<item name="973">
+			<value xml:lang="ko"><![CDATA[바레인]]></value>
+		</item>
+		<item name="966">
+			<value xml:lang="ko"><![CDATA[사우디아라비아]]></value>
+		</item>
+		<item name="963">
+			<value xml:lang="ko"><![CDATA[시리아]]></value>
+		</item>
+		<item name="971">
+			<value xml:lang="ko"><![CDATA[아랍에미리트연합국]]></value>
+		</item>
+		<item name="994">
+			<value xml:lang="ko"><![CDATA[아제르바이잔]]></value>
+		</item>
+		<item name="967">
+			<value xml:lang="ko"><![CDATA[예맨]]></value>
+		</item>
+		<item name="968">
+			<value xml:lang="ko"><![CDATA[오만]]></value>
+		</item>
+		<item name="962">
+			<value xml:lang="ko"><![CDATA[요르단]]></value>
+		</item>
+		<item name="964">
+			<value xml:lang="ko"><![CDATA[이라크]]></value>
+		</item>
+		<item name="98">
+			<value xml:lang="ko"><![CDATA[이란]]></value>
+		</item>
+		<item name="972">
+			<value xml:lang="ko"><![CDATA[이스라엘]]></value>
+		</item>
+		<item name="377">
+			<value xml:lang="ko"><![CDATA[코소보]]></value>
+		</item>
+		<item name="965">
+			<value xml:lang="ko"><![CDATA[쿠웨이트]]></value>
+		</item>
+		<item name="970">
+			<value xml:lang="ko"><![CDATA[팔레스타인]]></value>
+		</item>
+		<item name="1">
+			<value xml:lang="ko"><![CDATA[미국]]></value>
+		</item>
+		<item name="509">
+			<value xml:lang="ko"><![CDATA[아이티]]></value>
+		</item>
+		<item name="590">
+			<value xml:lang="ko"><![CDATA[과들루프]]></value>
+		</item>
+		<item name="502">
+			<value xml:lang="ko"><![CDATA[과테말라]]></value>
+		</item>
+		<item name="1671">
+			<value xml:lang="ko"><![CDATA[괌]]></value>
+		</item>
+		<item name="245">
+			<value xml:lang="ko"><![CDATA[기니]]></value>
+		</item>
+		<item name="687">
+			<value xml:lang="ko"><![CDATA[뉴칼레도니]]></value>
+		</item>
+		<item name="505">
+			<value xml:lang="ko"><![CDATA[니카라과]]></value>
+		</item>
+		<item name="691">
+			<value xml:lang="ko"><![CDATA[마이크로네시아]]></value>
+		</item>
+		<item name="356">
+			<value xml:lang="ko"><![CDATA[말타]]></value>
+		</item>
+		<item name="229">
+			<value xml:lang="ko"><![CDATA[베닌]]></value>
+		</item>
+		<item name="597">
+			<value xml:lang="ko"><![CDATA[수리남]]></value>
+		</item>
+		<item name="225">
+			<value xml:lang="ko"><![CDATA[아이보리코스트]]></value>
+		</item>
+		<item name="593">
+			<value xml:lang="ko"><![CDATA[에콰도르]]></value>
+		</item>
+		<item name="1284">
+			<value xml:lang="ko"><![CDATA[영국령 버진 제도]]></value>
+		</item>
+		<item name="61">
+			<value xml:lang="ko"><![CDATA[오스트레일리아]]></value>
+		</item>
+		<item name="504">
+			<value xml:lang="ko"><![CDATA[온두라스]]></value>
+		</item>
+		<item name="598">
+			<value xml:lang="ko"><![CDATA[우루과이]]></value>
+		</item>
+		<item name="998">
+			<value xml:lang="ko"><![CDATA[우즈베키스탄]]></value>
+		</item>
+		<item name="236">
+			<value xml:lang="ko"><![CDATA[중앙아프리카공화국]]></value>
+		</item>
+		<item name="253">
+			<value xml:lang="ko"><![CDATA[지부티]]></value>
+		</item>
+		<item name="235">
+			<value xml:lang="ko"><![CDATA[차드]]></value>
+		</item>
+		<item name="374">
+			<value xml:lang="ko"><![CDATA[나고르노카라바흐]]></value>
+		</item>
+		<item name="238">
+			<value xml:lang="ko"><![CDATA[카보베르데]]></value>
+		</item>
+		<item name="7">
+			<value xml:lang="ko"><![CDATA[카자흐스탄]]></value>
+		</item>
+		<item name="1345">
+			<value xml:lang="ko"><![CDATA[케이맨 제도]]></value>
+		</item>
+		<item name="506">
+			<value xml:lang="ko"><![CDATA[코스타리카]]></value>
+		</item>
+		<item name="243">
+			<value xml:lang="ko"><![CDATA[콩고민주공화국]]></value>
+		</item>
+		<item name="974">
+			<value xml:lang="ko"><![CDATA[카타르]]></value>
+		</item>
+		<item name="996">
+			<value xml:lang="ko"><![CDATA[키르기즈스탄]]></value>
+		</item>
+		<item name="686">
+			<value xml:lang="ko"><![CDATA[키리바시]]></value>
+		</item>
+		<item name="992">
+			<value xml:lang="ko"><![CDATA[타지키스탄]]></value>
+		</item>
+		<item name="676">
+			<value xml:lang="ko"><![CDATA[통가]]></value>
+		</item>
+		<item name="993">
+			<value xml:lang="ko"><![CDATA[투르크메니스탄]]></value>
+		</item>
+		<item name="670">
+			<value xml:lang="ko"><![CDATA[티모르]]></value>
+		</item>
+		<item name="689">
+			<value xml:lang="ko"><![CDATA[프랑스령 폴리네시아]]></value>
+		</item>
+	</item>
+</lang>

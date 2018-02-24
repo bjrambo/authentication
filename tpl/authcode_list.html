@@ -1,0 +1,69 @@
+<include target="header.html" />
+<!--%import("css/config.css")-->
+
+<form action="./" class="x_form-horizontal" method="get">
+		<input type="hidden" name="module" value="{$module}" />
+		<input type="hidden" name="act" value="dispAuthenticationAdminAuthcodeList" />
+		<input type="hidden" name="search_key" value="Y" />
+		<input type="hidden" name="error_return_url" value="" />
+	<section class="section">
+		<div class="x_control-group">
+			<label class="x_control-label">인증완료</label>
+			<div class="x_controls">
+				<select name="n_authcode_pass">
+					<option value=""> 선택 </option>
+					<option value="Y" selected="selected"|cond="$n_authcode_pass == 'Y'">인증완료</option>
+					<option value="N" selected="selected"|cond="$n_authcode_pass == 'N'">인증미완료</option>
+				</select>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label">휴대폰 번호</label>		
+			<div class="x_controls">
+				<input type="text" name="n_phone_number" value="{$n_phone_number}" />
+			</div>
+		</div>
+		<button class="x_btn" type="submit" >조회</button>
+	</section>
+	
+	<section class="section">
+ 	<caption style="text-align:right; margin-bottom:10px;">Total {number_format($total_count)}, Page {number_format($page)}/{number_format($total_page)}</caption>	
+		<table class="x_table">
+			<thead>
+				<tr>
+					<th scope="col">No.</th>
+					<th scope="col">휴대폰번호.</th>
+					<th scope="col">인증번호.</th>
+					<th scope="col">인증완료.</th>
+					<th scope="col">날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr loop="$authcode_list => $no,$val">
+					<td>{$no}</td>
+					<td>{$val->clue}</td>
+					<td>{$val->authcode}</td>
+					<td>{$val->passed}</td>
+					<td>{zdate($val->regdate)}</td>	
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</form>
+
+<include target="_page_navigation.html" />
+
+<!-- 페이지 네비게이션 -->
+<div cond="0" class="x_clearfix">
+    <a href="{getUrl('page','','module_srl','')}" class="prevEnd">{$lang->first_page}</a> 
+    <!--@while($page_no = $page_navigation->getNextPage())-->
+        <!--@if($page == $page_no)-->
+            <strong>{$page_no}</strong> 
+        <!--@else-->
+            <a href="{getUrl('page',$page_no,'module_srl','')}">{$page_no}</a> 
+        <!--@end-->
+    <!--@end-->
+    <a href="{getUrl('page',$page_navigation->last_page,'module_srl','')}" class="nextEnd">{$lang->last_page}</a>
+</div>
+
+

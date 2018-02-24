@@ -1,0 +1,11 @@
+<query id="updateAuthcodeBan" action="update">
+	<tables>
+		<table name="authentication" />
+	</tables>
+	<columns>
+		<column name="authcode_ban" var="authcode_ban" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="authentication_srl" var="authentication_srl" notnull="notnull" />
+	</conditions>
+</query>
