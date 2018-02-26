@@ -19,16 +19,6 @@ class authenticationView extends authentication
 		}
 		$this->setTemplatePath($this->module_path . "skins/{$config->skin}");
 	}
-
-	/*
-	function dispAuthenticationCompare()
-	{
-		$vars = Context::get('phone');
-		Context::set('phone', Context::get('phone'));
-		Context::set('authentication_srl', Context::get('authentication_srl'));
-		$this->setTemplateFile('index');
-	}
-	 */
 }
 /* End of file authentication.view.php */
 /* Location: ./modules/authentication/authentication.view.php */

@@ -17,44 +17,44 @@ class authenticationAdminController extends authentication
 
 	function procAuthenticationAdminConfig()
 	{
-		$args = Context::getRequestVars();
+		$obj = Context::getRequestVars();
 
-		if (!trim(strip_tags($args->agreement)))
+		if (!trim(strip_tags($obj->agreement)))
 		{
 			$agreement_file = _XE_PATH_ . 'files/authentication/agreement_' . Context::get('lang_type') . '.txt';
 			FileHandler::removeFile($agreement_file);
-			$args->agreement = NULL;
+			$obj->agreement = NULL;
 		}
 
 		// check agreement value exist
-		if ($args->agreement)
+		if ($obj->agreement)
 		{
 			$agreement_file = _XE_PATH_ . 'files/authentication/agreement_' . Context::get('lang_type') . '.txt';
-			$output = FileHandler::writeFile($agreement_file, $args->agreement);
+			$output = FileHandler::writeFile($agreement_file, $obj->agreement);
 
-			unset($args->agreement);
+			unset($obj->agreement);
 		}
 
-		if (!$args->sender_no)
+		if (!$obj->sender_no)
 		{
-			$args->sender_no = NULL;
+			$obj->sender_no = NULL;
 		}
-		if (!$args->message_content)
+		if (!$obj->message_content)
 		{
-			$args->message_content = NULL;
+			$obj->message_content = NULL;
 		}
-		if (!$args->list)
+		if (!$obj->list)
 		{
-			$args->list = NULL;
+			$obj->list = NULL;
 		}
-		if (!$args->cellphone_fieldname)
+		if (!$obj->cellphone_fieldname)
 		{
-			$args->cellphone_fieldname = NULL;
+			$obj->cellphone_fieldname = NULL;
 		}
 
 		// save module configuration.
 		$oModuleController = getController('module');
-		$output = $oModuleController->updateModuleConfig('authentication', $args);
+		$output = $oModuleController->updateModuleConfig('authentication', $obj);
 
 		$this->setMessage('success_saved');
 
@@ -64,15 +64,20 @@ class authenticationAdminController extends authentication
 
 	function procAuthenticationAdminDesignConfig()
 	{
-		$args = Context::getRequestVars();
+		$obj = Context::getRequestVars();
+		/** @var moduleController $oModuleController */
 		$oModuleController = getController('module');
 
-		if (!$args->width)
+		if (!$obj->width)
 		{
-			$args->width = NULL;
+			$obj->width = NULL;
 		}
 
-		$output = $oModuleController->updateModuleConfig('authentication', $args);
+		$output = $oModuleController->updateModuleConfig('authentication', $obj);
+		if(!$output->toBool())
+		{
+			return $output;
+		}
 
 		$this->setMessage('success_saved');
 
@@ -82,7 +87,7 @@ class authenticationAdminController extends authentication
 
 	function procAuthenticationAdminMigrateFromMXE()
 	{
-		$oMemberModel = &getModel('member');
+		$oMemberModel = getModel('member');
 		$output = executeQueryArray('authentication.getMXEAllMappingData');
 		if (!$output->toBool())
 		{
@@ -91,6 +96,7 @@ class authenticationAdminController extends authentication
 		foreach ($output->data as $key => $val)
 		{
 			$member_info = $oMemberModel->getMemberInfoByUserID($val->user_id);
+			$args = new stdClass();
 			$args->authentication_srl = 0;
 			$args->member_srl = $member_info->member_srl;
 			$args->clue = $val->phone_num;

@@ -11,7 +11,6 @@ class authenticationMobile extends authenticationView
 {
 	function init()
 	{
-		debugPrint('authentication mobile');
 		$oAuthenticationModel = &getModel('authentication');
 		$config = $oAuthenticationModel->getModuleConfig();
 		if (!$config->mskin)
@@ -20,7 +19,7 @@ class authenticationMobile extends authenticationView
 		}
 		$this->setTemplatePath($this->module_path . "m.skins/{$config->mskin}");
 
-		$oLayoutModel = &getModel('layout');
+		$oLayoutModel = getModel('layout');
 		$layout_info = $oLayoutModel->getLayout($config->mlayout_srl);
 		if ($layout_info)
 		{

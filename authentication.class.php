@@ -38,8 +38,8 @@ class authentication extends ModuleObject
 
 	function registerTriggers()
 	{
-		$oModuleController = &getController('module');
-		$oModuleModel = &getModel('module');
+		$oModuleController = getController('module');
+		$oModuleModel = getModel('module');
 
 		if (!$oModuleModel->getTrigger('moduleHandler.proc', 'authentication', 'controller', 'triggerModuleHandlerProc', 'after'))
 		{
@@ -74,8 +74,8 @@ class authentication extends ModuleObject
 	 */
 	function moduleInstall()
 	{
-		$oModuleController = &getController('module');
-		$oModuleModel = &getModel('module');
+		$oModuleController = getController('module');
+		$oModuleModel = getModel('module');
 
 		$this->registerTriggers();
 	}
@@ -85,8 +85,8 @@ class authentication extends ModuleObject
 	 */
 	function checkUpdate()
 	{
-		$oDB = &DB::getInstance();
-		$oModuleModel = &getModel('module');
+		$oDB = DB::getInstance();
+		$oModuleModel = getModel('module');
 		$oModuleController = &getController('module');
 
 		if (!$oModuleModel->getTrigger('moduleHandler.proc', 'authentication', 'controller', 'triggerModuleHandlerProc', 'after'))
@@ -122,9 +122,9 @@ class authentication extends ModuleObject
 	 */
 	function moduleUpdate()
 	{
-		$oDB = &DB::getInstance();
-		$oModuleModel = &getModel('module');
-		$oModuleController = &getController('module');
+		$oDB = DB::getInstance();
+		$oModuleModel = getModel('module');
+		$oModuleController = getController('module');
 
 		$this->registerTriggers();
 	}

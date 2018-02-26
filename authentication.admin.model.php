@@ -10,6 +10,7 @@ class authenticationAdminModel extends authentication
 {
 	function getAuthenticationAdminNumber()
 	{
+		$args = new stdClass();
 		$args->member_srl = Context::get('target_srl');
 		$output = executeQuery('authentication.getAuthenticationMember', $args);
 		if (!$output->toBool())

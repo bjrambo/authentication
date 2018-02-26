@@ -21,10 +21,7 @@ class authenticationAdminView extends authentication
 	{
 		$oAuthenticationModel = &getModel('authentication');
 		$oMemberModel = &getModel('member');
-		$oModuleController = &getController('module');
 		$oModuleModel = &getModel('module');
-
-		$module_srl = Context::get('module_srl');
 
 		$config = $oAuthenticationModel->getModuleConfig();
 		$config->agreement = $oAuthenticationModel->_getAgreement();
@@ -60,18 +57,23 @@ class authenticationAdminView extends authentication
 		$editor = $oEditorModel->getEditor(0, $option);
 		Context::set('editor', $editor);
 
-		require_once($this->module_path . 'authentication.actions.php');
-		//$action_list = array('dispMemberSignUpForm', 'dispMemberModifyInfo', 'dispMemberModifyPassword', 'dispMemberLeave');
-		foreach ($__AUTHENTICATION_ACTIONS__ as $key => $val)
+		$AUTHENTICATION_ACTIONS = array(
+			'dispMemberSignUpForm'     => '회원가입',
+			'dispMemberModifyInfo'     => '회원정보수정',
+			'dispMemberModifyPassword' => '비밀번호변경',
+			'dispMemberLeave'          => '회원탈퇴',
+			'dispBoardWrite'           => '게시판쓰기'
+		);
+
+		foreach ($AUTHENTICATION_ACTIONS as $key => $val)
 		{
 			Context::setLang($key, $val);
 		}
-		$action_list = array_keys($__AUTHENTICATION_ACTIONS__);
+		$action_list = array_keys($AUTHENTICATION_ACTIONS);
 		Context::set('action_list', $action_list);
 
 		$member_config = $oMemberModel->getMemberConfig();
 		Context::set("member_config", $member_config);
-
 
 		// set template file
 		$this->setTemplateFile('config');
@@ -83,15 +85,15 @@ class authenticationAdminView extends authentication
 	 */
 	function dispAuthenticationAdminDesign()
 	{
-		$oAuthenticationModel = &getModel('authentication');
-		$oModuleModel = &getModel('module');
+		$oAuthenticationModel = getModel('authentication');
+		$oModuleModel = getModel('module');
 
 		$config = $oAuthenticationModel->getModuleConfig();
 
 		Context::set('config', $config);
 
 		// Get a layout list
-		$oLayoutModel = &getModel('layout');
+		$oLayoutModel = getModel('layout');
 		$layout_list = $oLayoutModel->getLayoutList();
 		Context::set('layout_list', $layout_list);
 		$mlayout_list = $oLayoutModel->getLayoutList(0, 'M');
@@ -110,8 +112,8 @@ class authenticationAdminView extends authentication
 
 	function dispAuthenticationAdminAuthcodeList()
 	{
+		$args = new stdClass();
 		$args->page = Context::get('page');
-
 
 		$search_key = Context::get('search_key');
 		if ($search_key == 'Y')
@@ -143,6 +145,8 @@ class authenticationAdminView extends authentication
 	function dispAuthenticationAdminMemberList()
 	{
 		global $lang;
+
+		$args = new stdClass();
 		$args->page = Context::get('page');
 		$search_key = Context::get('search_key');
 		if ($search_key)
@@ -183,6 +187,7 @@ class authenticationAdminView extends authentication
 
 	function dispAuthenticationAdminXLSDownload()
 	{
+		$args = new stdClass();
 		$args->list_count = 999999;
 		$output = executeQuery('authentication.getAuthenticationMemberList', $args);
 		if (!$output->toBool())

@@ -44,6 +44,7 @@ class authenticationController extends authentication
 		// check duplicated.
 		if ($config->number_overlap == 'N' && $target_action == 'dispMemberSignUpForm')
 		{
+			$args = new stdClass();
 			$args->clue = $phonenum;
 			$output = executeQuery('authentication.getAuthenticationMemberCountByClue', $args);
 			if (!$output->toBool())
@@ -75,6 +76,7 @@ class authenticationController extends authentication
 		if ($config->number_overlap == 'N' && $target_action == 'dispMemberModifyInfo')
 		{
 			$logged_info = Context::get('logged_info');
+			$args = new stdClass();
 			$args->member_srl = $logged_info->member_srl;
 			$output = executeQuery('authentication.getAuthenticationMember', $args);
 			if (!$output->toBool())
@@ -93,6 +95,7 @@ class authenticationController extends authentication
 			 */
 			if ($clue != $phonenum)
 			{
+				$args = new stdClass();
 				$args->clue = $phonenum;
 				$output = executeQuery('authentication.getAuthenticationMemberCountByClue', $args);
 				if (!$output->toBool())
@@ -117,7 +120,6 @@ class authenticationController extends authentication
 					}
 				}
 			}
-			unset($args);
 		}
 
 		$trigger_output = ModuleHandler::triggerCall('authentication.procAuthenticationSendAuthCode', 'before', $reqvars);
@@ -129,8 +131,9 @@ class authenticationController extends authentication
 		// generate auth-code
 		$keystr = $this->getRandNumber($config->digit_number);
 
-		// check day try limit
+		// TODO(BJRambo): what the???.. make a simple.
 		$today = date("Ymd", mktime(0, 0, 0, date("m"), date("d"), date("Y")));
+		$args = new stdClass();
 		$args->clue = $phonenum;
 		$args->regdate = $today;
 		$output = executeQuery('authentication.getTryCountByClue', $args);
@@ -146,6 +149,7 @@ class authenticationController extends authentication
 
 		// check day try limit
 		$today = date("YmdHis", time() - $config->authcode_time_limit);
+		$args = new stdClass();
 		$args->clue = $phonenum;
 		$args->regdate = $today;
 		$output = executeQuery('authentication.getTryCountByClue', $args);
@@ -160,6 +164,7 @@ class authenticationController extends authentication
 		}
 
 		// save auth info
+		$args = new stdClass();
 		$args->authentication_srl = getNextSequence();
 		$args->country_code = $country_code;
 		$args->clue = $phonenum;
@@ -186,11 +191,11 @@ class authenticationController extends authentication
 		{
 			$args->content = $keystr;
 		}
-		//$args->encode_utf16 = $encode_utf16; 
 		$args->country = $country_code;
-		$controller = &getController('textmessage');
+		/** @var textmessageController $textmessageController */
+		$textmessageController = getController('textmessage');
 
-		$output = $controller->sendMessage($args);
+		$output = $textmessageController->sendMessage($args);
 		if (!$output->toBool())
 		{
 			return $output;
@@ -216,6 +221,7 @@ class authenticationController extends authentication
 		$reqvars = Context::getRequestVars();
 
 		$authentication_srl = Context::get('authentication_srl');
+		$args = new stdClass();
 		$args->authentication_srl = $authentication_srl;
 		$output = executeQuery('authentication.getAuthentication', $args);
 		if (!$output->toBool())
@@ -229,6 +235,7 @@ class authenticationController extends authentication
 		if ($authentication_1 == $authentication_2)
 		{
 			$_SESSION['authentication_pass'] = 'Y';
+			$args = new stdClass();
 			$args->passed = 'Y';
 			$args->authentication_srl = $_SESSION['authentication_srl'];
 			$output = executeQuery('authentication.updateAuthentication', $args);
@@ -264,6 +271,7 @@ class authenticationController extends authentication
 		$oTextmessageModel = &getModel('textmessage');
 		$sms = $oTextmessageModel->getCoolSMS();
 
+		$args = new stdClass();
 		$args->gid = Context::get('group_id');
 		$result = $sms->sent($args);
 		if ($result->data)
@@ -276,7 +284,7 @@ class authenticationController extends authentication
 
 	function startAuthentication(&$oModule)
 	{
-		$oAuthenticationModel = &getModel('authentication');
+		$oAuthenticationModel = getModel('authentication');
 		$config = $oAuthenticationModel->getModuleConfig();
 		$config->agreement = $oAuthenticationModel->_getAgreement();
 		if (Mobile::isFromMobilePhone())
@@ -337,7 +345,7 @@ class authenticationController extends authentication
 	/*
 	 * 외부페이지에서 직접 procMemberInsert를 호출하지 못하게 막는다. 
 	 */
-	function triggerMemberInsertBefore(&$in_args)
+	function triggerMemberInsertBefore($obj)
 	{
 		$oAuthenticationModel = &getModel('authentication');
 		$config = $oAuthenticationModel->getModuleConfig();
@@ -370,10 +378,11 @@ class authenticationController extends authentication
 	/*
 	 * 회원가입후 member_srl과 인증정보들을 authentication_member table에 넣는다.
 	 */
-	function triggerMemberInsert(&$in_args)
+	function triggerMemberInsert(&$obj)
 	{
 		if ($_SESSION['authentication_srl'])
 		{
+			$args = new stdClass();
 			$args->authentication_srl = $_SESSION['authentication_srl'];
 			$output = executeQuery('authentication.getAuthentication', $args);
 			if (!$output->toBool())
@@ -382,7 +391,7 @@ class authenticationController extends authentication
 			}
 			$authinfo = $output->data;
 
-			$args->member_srl = $in_args->member_srl;
+			$args->member_srl = $obj->member_srl;
 			$args->authcode = $authinfo->authcode;
 			$args->clue = $authinfo->clue;
 			$args->country_code = $authinfo->country_code;

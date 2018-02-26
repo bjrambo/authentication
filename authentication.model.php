@@ -56,6 +56,7 @@ class authenticationModel extends authentication
 
 	function getAuthenticationInfo($authentication_srl)
 	{
+		$args = new stdClass();
 		$args->authentication_srl = $authentication_srl;
 		$output = executeQuery('authentication.getAuthentication', $args);
 		if (!$output->toBool())
@@ -67,6 +68,7 @@ class authenticationModel extends authentication
 
 	function getAuthenticationMember($member_srl)
 	{
+		$args = new stdClass();
 		$args->member_srl = $member_srl;
 		$output = executeQuery('authentication.getAuthenticationMember', $args);
 		if (!$output->toBool())
@@ -78,6 +80,7 @@ class authenticationModel extends authentication
 
 	function getAuthenticationMemberListByClue($clue)
 	{
+		$args = new stdClass();
 		$args->clue = $clue;
 		$output = executeQueryArray('authentication.getAuthenticationMemberListByClue', $args);
 		if (!$output->toBool())
@@ -87,6 +90,7 @@ class authenticationModel extends authentication
 		return $output->data;
 	}
 
+	// TODO(BJRambo): what's this. we need this?
 	function _getAgreement()
 	{
 		$agreement_file = _XE_PATH_ . 'files/authentication/agreement_' . Context::get('lang_type') . '.txt';
@@ -159,6 +163,7 @@ class authenticationModel extends authentication
 	{
 		$oTextmessageModel = &getModel('textmessage');
 		$sms = $oTextmessageModel->getCoolSMS();
+		$options = new stdClass();
 		$options->count = 1;
 		$status = $sms->status($options);
 
@@ -229,7 +234,8 @@ class authenticationModel extends authentication
 	function triggerMemberMenu($in_args)
 	{
 		$url = getUrl('', 'module', 'authentication', 'act', 'dispAuthenticationSendMessage', 'member_srl', Context::get('target_srl'));
-		$oMemberController = &getController('member');
+		$oMemberController = getController('member');
+		// TODO(BJRambo): What is this... why name is test........................ 알다가도 모르겠구나..
 		$oMemberController->addMemberPopupMenu($url, 'test', '', 'popup');
 	}
 }
