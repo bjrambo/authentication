@@ -22,8 +22,6 @@ class authenticationView extends authentication
 	
 	function dispAuthenticationAuthNumber()
 	{
-		
-		
 		$this->setTemplateFile('index');
 	}
 }

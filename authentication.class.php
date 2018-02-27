@@ -15,7 +15,7 @@ class authentication extends ModuleObject
 		array('member.updateMember', 'authentication', 'controller', 'triggerMemberUpdate', 'after'),
 		array('member.insertMember', 'authentication', 'controller', 'triggerMemberInsertBefroe', 'before'),
 		array('member.deleteMember', 'authentication', 'controller', 'triggerMemberDelete', 'before'),
-		array('authentication.procAuthenticationSendAuthCode', 'authentication', 'controller', 'triggerSendAuthCode', 'after'),
+		array('authentication.procAuthenticationVerifyAuthCode', 'authentication', 'controller', 'triggerVerifyAuthCode', 'after'),
 	);
 
 	/**

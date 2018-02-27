@@ -141,7 +141,6 @@ class authenticationController extends authentication
 		{
 			return $output;
 		}
-		unset($args);
 		if ($output->data->count > $config->day_try_limit)
 		{
 			return $this->makeObject(-1, '잦은 인증번호 요청으로 금지되셨습니다. 1일뒤에 다시 시도해주십시오.');
@@ -157,7 +156,7 @@ class authenticationController extends authentication
 		{
 			return $output;
 		}
-		unset($args);
+
 		if ($output->data->count > 0)
 		{
 			return $this->makeObject(-1, $config->authcode_time_limit . '초 동안 다시 받으실 수 없습니다. 전송확인 버튼을 눌러 수신받지 못하는 사유를 확인하세요.');
@@ -223,16 +222,15 @@ class authenticationController extends authentication
 		$authentication_srl = Context::get('authentication_srl');
 		$args = new stdClass();
 		$args->authentication_srl = $authentication_srl;
-		$output = executeQuery('authentication.getAuthentication', $args);
-		if (!$output->toBool())
+		$authOutput = executeQuery('authentication.getAuthentication', $args);
+		if (!$authOutput->toBool())
 		{
-			return $output;
+			return $authOutput;
 		}
 
-		$authentication_1 = Context::get('authcode');
-		$authentication_2 = $output->data->authcode;
+		$authInfo = $authOutput->data;
 
-		if ($authentication_1 == $authentication_2)
+		if ($authInfo->authcode == Context::get('authcode'))
 		{
 			$_SESSION['authentication_pass'] = 'Y';
 			$args = new stdClass();
@@ -247,6 +245,7 @@ class authenticationController extends authentication
 
 			$reqvars->passed = 'Y';
 			$reqvars->authentication_srl = $args->authentication_srl;
+			$reqvars->phoneNumber = $authInfo->clue;
 			$trigger_output = ModuleHandler::triggerCall('authentication.procAuthenticationVerifyAuthCode', 'after', $reqvars);
 			if (!$trigger_output->toBool())
 			{
@@ -341,22 +340,27 @@ class authenticationController extends authentication
 		{
 			$this->startAuthentication($oModule);
 		}
-		
-		
-		if(Context::get('is_logged') && Context::get('act') !== 'dispAuthenticationAuthNumber')
+
+
+		if (Context::get('is_logged') && Context::get('act') !== 'dispAuthenticationAuthNumber')
 		{
 			$logged_info = Context::get('logged_info');
 
+			if ($logged_info->is_admin == 'Y')
+			{
+				return $this->makeObject();
+			}
+
 			$loggedAuthInfo = $oAuthenticationModel->getAuthenticationMember($logged_info->member_srl);
-			if(empty($loggedAuthInfo))
+			if (empty($loggedAuthInfo))
 			{
 				$path = sprintf('%sskins/%s/', $this->module_path, $config->skin);
 				$htmlTemplate = $oTemplateHandler->compile($path, 'darkview.html');
-				
+
 				Context::addHtmlFooter($htmlTemplate);
 			}
 		}
-		
+
 		return $this->makeObject();
 	}
 
@@ -474,6 +478,85 @@ class authenticationController extends authentication
 		if (!$output->toBool())
 		{
 			return $output;
+		}
+	}
+
+	function triggerVerifyAuthCode($obj)
+	{
+		if ($obj->passed == 'Y' && Context::get('is_logged'))
+		{
+			$oAuthenticationModel = getModel('authentication');
+			/** @var memberController $oMemberController */
+			$oMemberController = getController('member');
+
+			$authentication_config = $oAuthenticationModel->getModuleConfig();
+			$authentication_info = $oAuthenticationModel->getAuthenticationInfo($_SESSION['authentication_srl']);
+
+			$oMemberModel = getModel('member');
+			$memberConfig = $oMemberModel->getMemberConfig();
+			$signupForm = $memberConfig->signupForm;
+
+			if ($authentication_config->cellphone_fieldname)
+			{
+				$field_name = $authentication_config->cellphone_fieldname;
+
+				foreach ($signupForm as $k => $v)
+				{
+					if ($v->name == $field_name)
+					{
+						$field_type = $v->type;
+						break;
+					}
+				}
+
+				if (strlen($authentication_info->clue) > 10)
+				{
+					$phone[0] = substr($authentication_info->clue, 0, 3);
+					$phone[1] = substr($authentication_info->clue, 3, 4);
+					$phone[2] = substr($authentication_info->clue, -4, 4);
+				}
+				else
+				{
+					$phone[0] = substr($authentication_info->clue, 0, 3);
+					$phone[1] = substr($authentication_info->clue, 3, 3);
+					$phone[2] = substr($authentication_info->clue, -4, 4);
+				}
+				
+				if ($field_type == 'tel')
+				{
+					$phoneNumber = $phone;
+				}
+				else
+				{
+					$phoneNumber = $phone[0] . $phone[1] . $phone[2];
+				}
+				
+				$logged_info = Context::get('logged_info');
+				
+				$extra_vars = array();
+				$extra_vars[$field_name] = $phoneNumber;
+				$updateOutput = $oMemberController->updateMemberExtraVars($logged_info->member_srl, $extra_vars);
+				if($updateOutput->toBool())
+				{
+					$args = new stdClass();
+					$args->authentication_srl = $_SESSION['authentication_srl'];
+					$args->authcode = $authentication_info->authcode;
+					$args->member_srl = $logged_info->member_srl;
+					$args->clue = $authentication_info->clue;
+					$args->country_code = $authentication_info->country_code;
+					$output = executeQuery('authentication.deleteAuthenticationMember', $args);
+					if (!$output->toBool())
+					{
+						return $output;
+					}
+
+					$output = executeQuery('authentication.insertAuthenticationMember', $args);
+					if (!$output->toBool())
+					{
+						return $output;
+					}
+				}
+			}
 		}
 	}
 }
