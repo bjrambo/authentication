@@ -15,6 +15,21 @@ div.au_container dl.container_dl dd input { border:0; width:96%; position:absolu
 div.au_container dl.container_dl dd a.btn_wrap { color:#fff !important; font-weight:bold; width:20%; text-align:center; font-size:13px; position:absolute; right:0; text-decoration:none; } 
 div.au_container dl.container_dl dd a.submit { width:10%; }
 
+div.au_container dl.container_dl dd button.btn_wrap {
+	color: #fff !important;
+	font-weight: bold;
+	width: 20%;
+	text-align: center;
+	font-size: 13px;
+	position: absolute;
+	right: 0;
+	text-decoration: none;
+	border: none;
+	padding: 18px 10px;
+	display: inline-block;
+}
+div.au_container dl.container_dl dd button.submit { width:10%; }
+
 /* button_background */
 .au_blue { background:#45a9e7; }
 .au_gray { background:#5e5e5e; padding:0 10px; }

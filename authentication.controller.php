@@ -263,6 +263,13 @@ class authenticationController extends authentication
 			}
 			return $this->makeObject(-1, '인증코드가 올바르지 않습니다.');
 		}
+		
+		$target_action = Context::get('target_action');
+		if($target_action == 'logged_auth')
+		{
+			$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'mid', Context::get('mid'), 'act', 'dispMemberInfo');
+			$this->setRedirectUrl($returnUrl);
+		}
 	}
 
 	function procAuthenticationUpdateStatus()
