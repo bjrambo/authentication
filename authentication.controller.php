@@ -330,8 +330,10 @@ class authenticationController extends authentication
 	 **/
 	function triggerModuleHandlerProc(&$oModule)
 	{
-		$oAuthenticationModel = &getModel('authentication');
+		$oAuthenticationModel = getModel('authentication');
 		$config = $oAuthenticationModel->getModuleConfig();
+
+		$oTemplateHandler = TemplateHandler::getInstance();
 
 		$action_list = array_filter(explode(',', $config->list));
 
@@ -339,6 +341,22 @@ class authenticationController extends authentication
 		{
 			$this->startAuthentication($oModule);
 		}
+		
+		
+		if(Context::get('is_logged') && Context::get('act') !== 'dispAuthenticationAuthNumber')
+		{
+			$logged_info = Context::get('logged_info');
+
+			$loggedAuthInfo = $oAuthenticationModel->getAuthenticationMember($logged_info->member_srl);
+			if(empty($loggedAuthInfo))
+			{
+				$path = sprintf('%sskins/%s/', $this->module_path, $config->skin);
+				$htmlTemplate = $oTemplateHandler->compile($path, 'darkview.html');
+				
+				Context::addHtmlFooter($htmlTemplate);
+			}
+		}
+		
 		return $this->makeObject();
 	}
 
@@ -410,9 +428,10 @@ class authenticationController extends authentication
 	{
 		if ($_SESSION['authentication_srl'])
 		{
-			$oAuthenticationModel = &getModel('authentication');;
+			$oAuthenticationModel = getModel('authentication');;
 			$authentication_config = $oAuthenticationModel->getModuleConfig();
 
+			$args = new stdClass();
 			$args->authentication_srl = $_SESSION['authentication_srl'];
 			$output = executeQuery('authentication.getAuthentication', $args);
 			if (!$output->toBool())
@@ -449,6 +468,7 @@ class authenticationController extends authentication
 		{
 			return $this->makeObject(-1, 'msg_invalid_request');
 		}
+		$args = new stdClass();
 		$args->member_srl = $in_args->member_srl;
 		$output = executeQuery('authentication.deleteAuthenticationMember', $args);
 		if (!$output->toBool())

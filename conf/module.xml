@@ -17,6 +17,8 @@
 		<action name="procAuthenticationAdminDesignConfig" type="controller" />
 
 		<action name="getAuthenticationAdminNumber" type="model" />
+	    
+	    <action name="dispAuthenticationAuthNumber" type="view" />
 
 		<action name="procAuthenticationSendAuthCode" type="controller" ruleset="send_authcode" />
 		<action name="procAuthenticationVerifyAuthCode" type="controller" ruleset="verify_authcode" />

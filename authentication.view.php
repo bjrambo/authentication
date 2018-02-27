@@ -10,7 +10,7 @@ class authenticationView extends authentication
 {
 	function init()
 	{
-		$oAuthenticationModel = &getModel('authentication');
+		$oAuthenticationModel = getModel('authentication');
 		$config = $oAuthenticationModel->getModuleConfig();
 		$config->agreement = $oAuthenticationModel->_getAgreement();
 		if (!$config->skin)
@@ -18,6 +18,13 @@ class authenticationView extends authentication
 			$config->skin = "default";
 		}
 		$this->setTemplatePath($this->module_path . "skins/{$config->skin}");
+	}
+	
+	function dispAuthenticationAuthNumber()
+	{
+		
+		
+		$this->setTemplateFile('index');
 	}
 }
 /* End of file authentication.view.php */
