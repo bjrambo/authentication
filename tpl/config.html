@@ -37,9 +37,9 @@
 		<div class="x_control-group">
 			<label class="x_control-label">번호인증 강제</label>
 			<div class="x_controls">
-				<select name="memberUpdateAuth">
-					<option value="N" selected="selected"|cond="$config->memberUpdateAuth=='N'">사용하지않음</option>
-					<option value="Y" selected="selected"|cond="$config->memberUpdateAuth=='Y'">사용</option>
+				<select name="forceMemberCertification">
+					<option value="N" selected="selected"|cond="$config->forceMemberCertification=='N'">사용하지않음</option>
+					<option value="Y" selected="selected"|cond="$config->forceMemberCertification=='Y'">사용</option>
 				</select>
 				<p>이 옵션을 사용하게 되면 로그인 회원들에 대해서 휴대폰 인증을 강제하게 됩니다. 로그인 이용자들에게 로그인 화면으로 안내하는 문구가 항상 뜨게 됩니다. 그렇게 등록된 회원들만 사용이 가능합니다. (최고관리자 제외)</p>
 			</div>

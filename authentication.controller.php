@@ -348,7 +348,7 @@ class authenticationController extends authentication
 		}
 
 
-		if (Context::get('is_logged') && Context::get('act') !== 'dispAuthenticationAuthNumber' && $config->memberUpdateAuth == 'Y')
+		if (Context::get('is_logged') && Context::get('act') !== 'dispAuthenticationAuthNumber' && $config->forceMemberCertification == 'Y')
 		{
 			$logged_info = Context::get('logged_info');
 
@@ -492,7 +492,7 @@ class authenticationController extends authentication
 		$oAuthenticationModel = getModel('authentication');
 		$authentication_config = $oAuthenticationModel->getModuleConfig();
 		
-		if ($obj->passed == 'Y' && Context::get('is_logged') && $authentication_config->memberUpdateAuth == 'Y')
+		if ($obj->passed == 'Y' && Context::get('is_logged') && $authentication_config->forceMemberCertification == 'Y')
 		{
 			/** @var memberController $oMemberController */
 			$oMemberController = getController('member');
