@@ -245,7 +245,6 @@ class authenticationController extends authentication
 
 			$reqvars->passed = 'Y';
 			$reqvars->authentication_srl = $args->authentication_srl;
-			$reqvars->phoneNumber = $authInfo->clue;
 			$trigger_output = ModuleHandler::triggerCall('authentication.procAuthenticationVerifyAuthCode', 'after', $reqvars);
 			if (!$trigger_output->toBool())
 			{
@@ -349,7 +348,7 @@ class authenticationController extends authentication
 		}
 
 
-		if (Context::get('is_logged') && Context::get('act') !== 'dispAuthenticationAuthNumber')
+		if (Context::get('is_logged') && Context::get('act') !== 'dispAuthenticationAuthNumber' && $config->memberUpdateAuth == 'Y')
 		{
 			$logged_info = Context::get('logged_info');
 
@@ -490,13 +489,14 @@ class authenticationController extends authentication
 
 	function triggerVerifyAuthCode($obj)
 	{
-		if ($obj->passed == 'Y' && Context::get('is_logged'))
+		$oAuthenticationModel = getModel('authentication');
+		$authentication_config = $oAuthenticationModel->getModuleConfig();
+		
+		if ($obj->passed == 'Y' && Context::get('is_logged') && $authentication_config->memberUpdateAuth == 'Y')
 		{
-			$oAuthenticationModel = getModel('authentication');
 			/** @var memberController $oMemberController */
 			$oMemberController = getController('member');
 
-			$authentication_config = $oAuthenticationModel->getModuleConfig();
 			$authentication_info = $oAuthenticationModel->getAuthenticationInfo($_SESSION['authentication_srl']);
 
 			$oMemberModel = getModel('member');
