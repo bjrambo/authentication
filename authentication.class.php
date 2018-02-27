@@ -8,8 +8,21 @@
  */
 class authentication extends ModuleObject
 {
+
+	var $triggers = array(
+		array('moduleHandler.proc', 'authentication', 'controller', 'triggerModuleHandlerProc', 'after'),
+		array('member.insertMember', 'authentication', 'controller', 'triggerMemberInsert', 'after'),
+		array('member.updateMember', 'authentication', 'controller', 'triggerMemberUpdate', 'after'),
+		array('member.insertMember', 'authentication', 'controller', 'triggerMemberInsertBefroe', 'before'),
+		array('member.deleteMember', 'authentication', 'controller', 'triggerMemberDelete', 'before'),
+		array('authentication.procAuthenticationSendAuthCode', 'authentication', 'controller', 'triggerSendAuthCode', 'after'),
+	);
+
 	/**
 	 * @brief Object를 텍스트의 %...% 와 치환.
+	 * @param $text
+	 * @param $obj
+	 * @return null|string|string[]
 	 */
 	function mergeKeywords($text, &$obj)
 	{
@@ -36,39 +49,6 @@ class authentication extends ModuleObject
 		return $text;
 	}
 
-	function registerTriggers()
-	{
-		$oModuleController = getController('module');
-		$oModuleModel = getModel('module');
-
-		if (!$oModuleModel->getTrigger('moduleHandler.proc', 'authentication', 'controller', 'triggerModuleHandlerProc', 'after'))
-		{
-			$oModuleController->insertTrigger('moduleHandler.proc', 'authentication', 'controller', 'triggerModuleHandlerProc', 'after');
-		}
-
-		if (!$oModuleModel->getTrigger('member.insertMember', 'authentication', 'controller', 'triggerMemberInsert', 'after'))
-		{
-			$oModuleController->insertTrigger('member.insertMember', 'authentication', 'controller', 'triggerMemberInsert', 'after');
-		}
-
-		if (!$oModuleModel->getTrigger('member.updateMember', 'authentication', 'controller', 'triggerMemberUpdate', 'after'))
-		{
-			$oModuleController->insertTrigger('member.updateMember', 'authentication', 'controller', 'triggerMemberUpdate', 'after');
-		}
-
-		// 2014/04/16 추가 외부 페이지에서 바로 procMemberInsert로 가는것을 방지
-		if (!$oModuleModel->getTrigger('member.insertMember', 'authentication', 'controller', 'triggerMemberInsertBefroe', 'before'))
-		{
-			$oModuleController->insertTrigger('member.insertMember', 'authentication', 'controller', 'triggerMemberInsertBefore', 'before');
-		}
-
-		// 2015/05/27 회원 삭제시 트리거
-		if (!$oModuleController->insertTrigger('member.deleteMember', 'authentication', 'controller', 'triggerMemberDelete', 'before'))
-		{
-			$oModuleController->insertTrigger('member.deleteMember', 'authentication', 'controller', 'triggerMemberDelete', 'before');
-		}
-	}
-
 	/**
 	 * @brief 모듈 설치 실행
 	 */
@@ -77,7 +57,13 @@ class authentication extends ModuleObject
 		$oModuleController = getController('module');
 		$oModuleModel = getModel('module');
 
-		$this->registerTriggers();
+		foreach($this->triggers as $trigger)
+		{
+			if(!$oModuleModel->getTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]))
+			{
+				$oModuleController->insertTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]);
+			}
+		}
 	}
 
 	/**
@@ -87,31 +73,10 @@ class authentication extends ModuleObject
 	{
 		$oDB = DB::getInstance();
 		$oModuleModel = getModel('module');
-		$oModuleController = &getController('module');
 
-		if (!$oModuleModel->getTrigger('moduleHandler.proc', 'authentication', 'controller', 'triggerModuleHandlerProc', 'after'))
+		foreach($this->triggers as $trigger)
 		{
-			return true;
-		}
-		if (!$oModuleModel->getTrigger('member.insertMember', 'authentication', 'controller', 'triggerMemberInsert', 'after'))
-		{
-			return true;
-		}
-		if (!$oModuleModel->getTrigger('member.updateMember', 'authentication', 'controller', 'triggerMemberUpdate', 'after'))
-		{
-			return true;
-		}
-
-		// 2014/04/16 추가 외부 페이지에서 바로 procMemberInsert로 가는것을 방지
-		if (!$oModuleModel->getTrigger('member.insertMember', 'authentication', 'controller', 'triggerMemberInsertBefore', 'before'))
-		{
-			return true;
-		}
-
-		// 2015/05/27 회원 삭제시 트리거
-		if (!$oModuleModel->getTrigger('member.deleteMember', 'authentication', 'controller', 'triggerMemberDelete', 'before'))
-		{
-			return true;
+			if(!$oModuleModel->getTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4])) return true;
 		}
 
 		return false;
@@ -126,7 +91,13 @@ class authentication extends ModuleObject
 		$oModuleModel = getModel('module');
 		$oModuleController = getController('module');
 
-		$this->registerTriggers();
+		foreach($this->triggers as $trigger)
+		{
+			if(!$oModuleModel->getTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]))
+			{
+				$oModuleController->insertTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]);
+			}
+		}
 	}
 
 	/**
