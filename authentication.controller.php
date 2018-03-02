@@ -542,7 +542,7 @@ class authenticationController extends authentication
 				
 				$extra_vars = array();
 				$extra_vars[$field_name] = $phoneNumber;
-				$updateOutput = $oMemberController->updateMemberExtraVars($logged_info->member_srl, $extra_vars);
+				$updateOutput = $this->updateMemberExtraVars($logged_info->member_srl, $extra_vars);
 				if($updateOutput->toBool())
 				{
 					$args = new stdClass();
@@ -565,6 +565,46 @@ class authenticationController extends authentication
 				}
 			}
 		}
+	}
+
+	/**
+	 * update member extra vars. 
+	 * from : rhymix
+	 * @param $member_srl
+	 * @param array $values
+	 * @return object
+	 */
+	function updateMemberExtraVars($member_srl, array $values)
+	{
+		/** @var memberController $oMemberController */
+		$oMemberController = getController('member');
+		
+		$args = new stdClass();
+		$args->member_srl = $member_srl;
+		$output = executeQuery('member.getMemberInfoByMemberSrl', $args, array('extra_vars'));
+		if (!$output->toBool())
+		{
+			return $output;
+		}
+
+		$extra_vars = $output->data->extra_vars ? unserialize($output->data->extra_vars) : new stdClass;
+		foreach ($values as $key => $val)
+		{
+			$extra_vars->{$key} = $val;
+		}
+
+		$args = new stdClass();
+		$args->member_srl = $member_srl;
+		$args->extra_vars = serialize($extra_vars);
+		$output = executeQuery('authentication.updateMemberExtraVars', $args);
+		if (!$output->toBool())
+		{
+			return $output;
+		}
+
+		$oMemberController->_clearMemberCache($member_srl, $args->site_srl);
+
+		return $output;
 	}
 }
 /* End of file authentication.controller.php */
